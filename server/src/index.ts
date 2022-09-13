@@ -29,7 +29,7 @@ app.use(cors())
 
 const PORT = process.env.PORT || 3022;
 
-app.get('/',(req, res) => {
+app.get('/', (req, res) => {
 return res.send('server is listening')
 })
 
@@ -44,13 +44,13 @@ io.on('connection', (socket:any) => {
         socket.broadcast.emit('callended')
     });
 
-    socket.on('calluser', ({userToCall, signalData, from, name}:any) => {
+    socket.on('callUser', ({userToCall, signalData, from, name}:any) => {
         console.log('supa bounce')
-        io.to(userToCall).emit('calluser', {signal: signalData, from, name})
+        io.to(userToCall).emit('callUser', {signal: signalData, from, name})
     })
 
-    socket.on('answercall', (data:any) => {
-        io.to(data.to).emit('callaccepted', data.answer)
+    socket.on('answerCall', (data:any) => {
+        io.to(data.to).emit('callAccepted', data.answer)
     })
 })
 
