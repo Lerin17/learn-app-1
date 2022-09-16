@@ -45,7 +45,7 @@ io.on('connection', (socket:any) => {
     });
 
     socket.on('callUser', ({userToCall, signalData, from, name}:any) => {
-        console.log('supa bounce')
+        // console.log('supa bounce')
         io.to(userToCall).emit('callUser', {signal: signalData, from, name})
     })
 
