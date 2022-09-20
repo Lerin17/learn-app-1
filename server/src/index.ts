@@ -49,8 +49,13 @@ io.on('connection', (socket:any) => {
         io.to(userToCall).emit('callUser', {signal: signalData, from, name})
     })
 
-    socket.on('answerCall', (data:any) => {
-        io.to(data.to).emit('callAccepted', data.answer)
+    socket.on('answerCall', ({to, answer}:any) => {
+        io.to(to).emit('callAccepted', {answer})
+    })
+
+    socket.on('iceCandidate', ({to, candidate}:any) => {
+        console.log(candidate, 'candidate')
+        io.to(to).emit('iceSend', {candidate})
     })
 })
 
